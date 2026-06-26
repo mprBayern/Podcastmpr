@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Podcast</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f3f4f6;
+    padding: 40px;
+}
+
+/* Zurück-Button */
+.back {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 8px 12px;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* Player-Box */
+.player {
+    background: #e5e7eb;
+    border-radius: 12px;
+    max-width: 700px;
+    padding: 20px;
+    margin: auto;
+    position: relative;
+}
+
+/* Logo oben rechts */
+.logo {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    height: 50px;
+}
+
+/* Titel */
+.title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Layout */
+.row {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Bild */
+.cover {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Controls */
+.controls {
+    flex: 1;
+}
+
+/* Play Button */
+button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    font-size: 22px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+/* Fortschrittsbalken */
+.progress {
+    width: 100%;
+}
+
+/* Zeit */
+.time {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #555;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ✅ ZURÜCK-LINK (schon richtig eingebaut!) -->
+<a href="https://www.mpr-bayern.de/de/news#akt_473" class="back">
+    ← Zurück zum Artikel
+</a>
+
+<div class="player">
+
+    <!-- ✅ LOGO -->
+    <img src="logo.jpg" class="logo">
+
+    <div class="title">
+        Neuer innovativer Sprinter
+    </div>
+
+    <div class="row">
+
+        <!-- ✅ COVER -->
+        <img src="cover.jpg" class="cover">
+
+        <!-- ✅ PLAYER -->
+        <div class="controls">
+
+            <button id="play">▶</button>
+
+            <input type="range" id="progress" class="progress" value="0">
+
+            <div class="time">
+                <span id="current">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ✅ AUDIO -->
+<audio id="audio" src="mp3"></audio>
+
+<script>
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("play");
+const progress = document.getElementById("progress");
+const current = document.getElementById("current");
+const duration = document.getElementById("duration");
+
+// Play / Pause
+playBtn.onclick = () => {
+    if (audio.paused) {
+        audio.play();
+        playBtn.innerText = "⏸";
+    } else {
+        audio.pause();
+        playBtn.innerText = "▶";
+    }
+};
+
+// Fortschritt
+audio.ontimeupdate = () => {
+    progress.value = (audio.currentTime / audio.duration) * 100;
+    current.innerText = formatTime(audio.currentTime);
+};
+
+// Dauer
+audio.onloadedmetadata = () => {
+    duration.innerText = formatTime(audio.duration);
+};
+
+// Springen
+progress.oninput = () => {
+    audio.currentTime = (progress.value / 100) * audio.duration;
+};
+
+// Zeit formatieren
+function formatTime(time) {
+    const min = Math.floor(time / 60);
+    const sec = Math.floor(time % 60);
+    return min + ":" + (sec < 10 ? "0" : "") + sec;
+}
+</script>
+
+</body>
+</html>
