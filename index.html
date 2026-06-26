@@ -11,6 +11,14 @@ body {
     padding: 40px;
 }
 
+/* ✅ LOGO (groß oben rechts) */
+.page-logo {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    height: 140px; /* 🔥 größer */
+}
+
 /* Zurück-Button */
 .back {
     display: inline-block;
@@ -30,7 +38,6 @@ body {
     max-width: 700px;
     padding: 20px;
     margin: auto;
-    position: relative;
 }
 
 /* Titel */
@@ -47,7 +54,7 @@ body {
     align-items: center;
 }
 
-/* Bild */
+/* ✅ COVER BILD */
 .cover {
     width: 120px;
     height: 120px;
@@ -84,14 +91,6 @@ button {
     font-size: 12px;
     color: #555;
 }
-
-/* LOGO oben rechts (ganze Seite) */
-.page-logo {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    height: 60px;
-}
 </style>
 </head>
 
@@ -100,11 +99,12 @@ button {
 <!-- ✅ LOGO -->
 <img src="logo.jpg" class="page-logo">
 
-<!-- ✅ ZURÜCK-LINK -->
+<!-- ✅ ZURÜCK -->
 <a href="https://www.mpr-bayern.de/de/news#akt_473" class="back">
     ← Zurück zum Artikel
 </a>
 
+<!-- ✅ PLAYER -->
 <div class="player">
 
     <div class="title">
@@ -113,10 +113,9 @@ button {
 
     <div class="row">
 
-        <!-- ✅ COVER -->
-        <img src="cover2.jpg" class="cover">
+        <!-- ✅ HIER IST DEIN BILD -->
+        <img src="cover.jpg" class="cover">
 
-        <!-- ✅ PLAYER -->
         <div class="controls">
 
             <button id="play">▶</button>
@@ -134,7 +133,7 @@ button {
 
 </div>
 
-<!-- ✅ AUDIO (DEIN LINK) -->
+<!-- ✅ AUDIO -->
 <audio id="audio" src="https://mprbayern.github.io/Podcastmpr/Podcast_Kosten%20Rohmilchguete.mp3"></audio>
 
 <script>
